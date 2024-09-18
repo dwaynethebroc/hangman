@@ -132,14 +132,17 @@ class Game
     until input =~ /^[ny]+/  
       puts "please enter 'y' or 'n' to reset game"
       input = gets.chomp
+      puts input
     end 
 
     if input = 'y'
       puts "Ok game restarting"
       stickfigure = Game.new
+      puts "New game started!\n \n"
       stickfigure.game_turn
-    elsif input = 'n'
+    else
       puts "Thanks for playing!"
+      false
     end 
   end 
 
