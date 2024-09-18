@@ -113,15 +113,34 @@ class Game
 
     puts stickfigure_array[incorrect_guesses]
     puts "--------------------------------- \n"
+
     puts "Scoreboard: \n"
     puts guess_array 
   end 
 
   def check_win_condition(array_of_correct_guesses, hangman_array)
-    if array_of_correct_guesses == hangman_array
+    if !array_of_correct_guesses.include?('-') && array_of_correct_guesses.sort == hangman_array.sort
       true
     else
       false
+    end 
+  end 
+
+  def game_restart
+    input = ""
+
+    until input =~ /^[ny]+/  
+      puts "please enter 'y' or 'n' to reset game"
+      input = gets.chomp
+    end 
+
+    if input = 'y'
+      puts "Ok game restarting"
+      stickfigure = Game.new
+      stickfigure.game_turn
+    elsif input = 'n'
+      puts "Thanks for playing!"
+    end 
   end 
 
   def game_turn
@@ -129,11 +148,13 @@ class Game
     until @incorrect_guesses == 6
       guess = ask_for_guess()
 
+      puts guess
+      puts @hangman_password
       if compare_guess_to_word(guess, @hangman_password)
         @guess_array.push(guess)
 
         @hangman_array.each_with_index do |letter, i|
-          if @hangman_array[i] == letter
+          if @hangman_array[i] == guess
             @array_of_correct_guesses[i] = letter
           end 
         end 
@@ -151,16 +172,17 @@ class Game
       end 
     end 
     
-    if game_win
+    if @game_win
       puts "You Win!"
     else
       puts "Game Over. You lost!"
     end
+
+    game_restart()
   end 
 end 
 
 
 stickfigure = Game.new
-
 stickfigure.game_turn
 
