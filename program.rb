@@ -132,14 +132,13 @@ class Game
     until input =~ /^[ny]+/  
       puts "please enter 'y' or 'n' to reset game"
       input = gets.chomp
-      puts input
     end 
 
-    if input = 'y'
+    if input == 'y'
       puts "Ok game restarting"
-      stickfigure = Game.new
+      initialize()
       puts "New game started!\n \n"
-      stickfigure.game_turn
+      game_turn
     else
       puts "Thanks for playing!"
       false
@@ -151,7 +150,6 @@ class Game
     until @incorrect_guesses == 6
       guess = ask_for_guess()
 
-      puts guess
       puts @hangman_password
       if compare_guess_to_word(guess, @hangman_password)
         @guess_array.push(guess)
