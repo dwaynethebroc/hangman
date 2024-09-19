@@ -5,10 +5,14 @@ class Game
     @hangman_password = get_random_word(@dictionary)
     @guess_array = Array.new() 
     @incorrect_guesses = 0
-    @array_of_correct_guesses = Array.new(@hangman_password.size, "-")
+    @array_of_correct_guesses = Array.new(@hangman_password.size, "_")
     @hangman_array = @hangman_password.split('')
     @game_win = false
   end 
+
+  #save game method
+
+  #load save game method 
 
   def get_random_word(dictionary)
     dictionary_array = dictionary.map(&:strip)
@@ -115,7 +119,7 @@ class Game
     puts "--------------------------------- \n"
 
     puts "Scoreboard: \n"
-    puts guess_array.join('')
+    puts guess_array.join(' ')
     puts "\n"
   end 
 
@@ -185,7 +189,6 @@ class Game
     game_restart()
   end 
 end 
-
 
 stickfigure = Game.new
 stickfigure.game_turn
