@@ -115,7 +115,8 @@ class Game
     puts "--------------------------------- \n"
 
     puts "Scoreboard: \n"
-    puts guess_array 
+    puts guess_array.join('')
+    puts "\n"
   end 
 
   def check_win_condition(array_of_correct_guesses, hangman_array)
@@ -138,7 +139,7 @@ class Game
       puts "Ok game restarting"
       initialize()
       puts "New game started!\n \n"
-      game_turn
+      game_turn()
     else
       puts "Thanks for playing!"
       false
@@ -150,7 +151,6 @@ class Game
     until @incorrect_guesses == 6
       guess = ask_for_guess()
 
-      puts @hangman_password
       if compare_guess_to_word(guess, @hangman_password)
         @guess_array.push(guess)
 
@@ -177,6 +177,9 @@ class Game
       puts "You Win!"
     else
       puts "Game Over. You lost!"
+      puts "\n"
+      puts "Correct word: #{@hangman_password}"
+      puts "\n"
     end
 
     game_restart()
